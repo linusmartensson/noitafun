@@ -1,4 +1,4 @@
-99 constraints loaded
+97 constraints loaded
 Encoded data: 
 00000000001111111111222222222233333333334444444444555555555566666666667777777777888888888899999999990000000000111111111122222222223333333333
 01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
@@ -38,43 +38,43 @@ Ab%QkV"\=H"W)/[2d#D%OA5[L2<l[B\_o;,V%QPVWT^he*Y6ZPcU'B@>?3:(BN'>gWBkV)&\%79MJp9,
 
 Resolution found with 1 independent variables
 mv=24
-kl=50
+kl=48
 00000000001111111111222222222233333333334444444444555555555566666666667777777777888888888899999999990000000000111111111122222222223333333333
 01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789
 repeating key:
-pälmjimohjöyg,däiegöaktoaee o.,mkäny.ö,k amuyövdgapälmjimohjöyg,däiegöaktoaee o.,mkäny.ö,k amuyövdgapälmjimohjöyg,däiegöaktoaee o.,mkäny.
+m ydktiolvgpäaegkyodmäjj,njdl.v,glryuvhägjl.ve am ydktiolvgpäaegkyodmäjj,njdl.v,glryuvhägjl.ve am ydktiolvgpäaegkyodmäjj,njdl.v,glryuvhäg
 decoded outputs:
-s ,tllyyök.htvkähjpne..sdjlvhoanv,v hyataötedhö.udpp,t,seliä,yyiinöyötedrtä,ehj,ot ö,tvö akpavnv y,
-ö ,tllyyök.htvkähjpne..sdgmkvoanvjup.yataötedhö.udlkgöns.vönip.eyoh rrötedrtä,eodnethuvshkgolläavyvs,tn
-a ,tllyyök.htvkähjpne..sdäei.e, t, .gnjmmäsasnötedhö.udlk vyjoktlyihädt,gyyoh rrötedrtä,eodyöolnthg,vjlhnt,uumiv ahvml
-u ,u,dpohä.y gdrg.hv ijddhledvo.rs.ötsprjpöyappyögönt,höikjäy.dpn moö,htoplisaani,yj.äd i,yö drd.reta,
-g ,u,dvddnnimjyhkaso kjtotjsdtprhkj,htgaie okpenylh.rydngkm,et mmsv kptrnökyvvtöh,u,epäv j tmj.talk.yvtl.dlyldäkrasa liosmäköhäera syjdse
-. ,u,dstkkllugyslnklege,ouvölo,äkspknkkgiäsddohkvuyyyäota  hdhim,arrö tjyäopodekv.jyjkodsmjkmhvgy aäd,sii,hhkö.kalujkd na to
-t ,u,dvddnjrjyn tdmm .igdueivptjgrkpmkg läiaögn,ai hrdsu.sntiivimedahrhdkdydvra,ymysj mmnögs.slrhtd syomläehrjipi,änjhu
-v ,u,dvddnjrjyn tdmm ij,d.iv rpny lmv,ieus,lk,evrs,huvgdsu.sntii.jmäipelseävuayp,sypöök slljrimdmöevky,pjmdme.aalhjovyrn
-, ,u,dvddnjrjyn tdmm ejaöueiaptjalepkig lhilgsu,kakn ded.l.eshhm.pidgrjispdäumssdärlhgyrög,d vhirjyav,iyprktmääa,ö
- : 54
-,: 60
-.: 41
-a: 40
-d: 69
-e: 42
-g: 27
-h: 50
-i: 42
-j: 44
-k: 47
-l: 44
-m: 36
-n: 40
-o: 28
-p: 34
-r: 37
-s: 44
-t: 55
-u: 29
-v: 47
-y: 54
-ä: 32
-ö: 40
-var: 105.71; avg: 43.1667
+väo k..yuötn sjoeshivnkäh.htkoh.,ls n,vgösuöe.s nejj.m.lgejr.pä  osäsuöekur.öia.iuv,tuo,vd.sukirköj
+ äo k..yuötn sjoeshivnkähäiiöoh.,vrph,vgösuöe.s needhsol o,hjj öpp.akssuöekur.öpäoöu.vot.lyra.södöereär
+gäo k..yuötn sjoeshivnkäho.gdedoälö.mr ,irtythsuöe.s neelvypkilmeä irem.,äpp.akssuöekur.öpuöpdgj jpö.noelggtdt lägyoit
+ääoaötuoaltakaaidjöpsvtjhöhahvtnvdäö,videj,pdjjäshshutisjdkräuejhagps..uirejldyo .pkuöäa .m.ttl,jtosid
+jäoaöt,d, govgvöiljjsätöskephtudlyg,nyöpdöailjöopm.uspehhdntgmaggtoadrmsh,däoym,..n.örryvksvdövolnu, ,yjörsvvkr.mghyätedvjhvplhh,skimlkr,
+däoaötytgödsaavjjy gvtoeslryoodkodmkunatdrtäei.lovppärpmdva.e.jgtdkssamkpöirieölo aäalieln,mdyp edmyjdvggmngueu.öojaglöagöa,
+yäoaöt,d,  ästmtrmdhsnslhl.göpäykahptnöohrjy,,h.yjv.sätn lomj y ggäd.s.edepeosy.pnptaagnh,yushgmpvn.ä.skjklg.p gdamheor
+öäoaöt,d,  ästmtrmdhsvtehsdteru..nim a.spl.eltöyktt.vohätn lomj ukgö römlgryndprttprs,dalm liäh,v.oup.anh,klohythköirdna
+aäoaöt,d,  ästmtrmdhssti l.ggpäyhä prlöoh.jehln.dddhaägä e öt.igur e,sajlräönnltäökm.hpsshpgtk d,lg .dlundrsydrtv 
+ : 49 #################################################
+,: 37 #####################################
+.: 65 #################################################################
+a: 41 #########################################
+d: 52 ####################################################
+e: 44 ############################################
+g: 40 ########################################
+h: 49 #################################################
+i: 29 #############################
+j: 38 ######################################
+k: 36 ####################################
+l: 42 ##########################################
+m: 31 ###############################
+n: 34 ##################################
+o: 48 ################################################
+p: 40 ########################################
+r: 40 ########################################
+s: 59 ###########################################################
+t: 57 #########################################################
+u: 34 ##################################
+v: 35 ###################################
+y: 31 ###############################
+ä: 47 ###############################################
+ö: 58 ##########################################################
+var: 95.971; avg: 43.1667
