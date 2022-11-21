@@ -292,7 +292,9 @@ int main(int argc, char **argv) {
                 float avg = 0;
                 float var = 0;
                 for(auto e : hist){
-                            wcout<<(wchar_t)e.first<<": "<<e.second<<endl;
+                    wcout<<(wchar_t)e.first<<": "<<e.second<<" ";
+                    for(int i=0;i < e.second;++i) wcout<<"#";
+                    wcout<<endl;
                     avg += e.second;
                 }
                 avg /= modval();
