@@ -269,10 +269,13 @@ int main(int argc, char **argv) {
             for(int ofs=0;ofs < 1;++ofs){
                 map<int, int> hist;
                 getdigits();
-                for(int c = 0; c < 139;++c){
+                wcout<<"repeating key:"<<endl;
+                for(int c = 0; c < 137;++c){
                     wcout<<(wchar_t)alphabetize(((data[c%i]+ofs)%modval()),falphabet);
                 }
                 wcout<<endl;
+
+                wcout<<"decoded outputs:"<<endl;
                 int ccc = 0;
                 for(auto e : lines){
                     int p=0;
