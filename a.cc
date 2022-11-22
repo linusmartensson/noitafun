@@ -69,12 +69,15 @@ struct EQD {
     constexpr EQD(C a, C b) : a(a), b(b) {}
 };
 
+int R = 0;
 int decrypt(int c, int k, int i){
     return (c - k + modval()) % modval();
 }
 
-bool constrain(const vector<EQD> &eqds, vector<C> &open_key, vector<C> &fixed_key, C c, int keylen){
+int constrain(const vector<EQD> &eqds, vector<C> &open_key, vector<C> &fixed_key, C c, int keylen, map<int, int> &observations){
     //Find any constraint edges affected by new constraint c
+	//
+	int coupling = 0;
     for(auto &e : eqds){
         C o;
         C l;
@@ -117,8 +120,11 @@ bool constrain(const vector<EQD> &eqds, vector<C> &open_key, vector<C> &fixed_ke
                     wcout<<o.value-l.value+c.value<<endl;
                     wcout<<"error: "<<new_value-e.value<<endl;
 #endif
-                    return false;
-                }
+                    return -1;
+                } else {
+					coupling++;
+					observations[e.offset]++;
+				}
             }
         }
 #ifdef CHECK
@@ -143,22 +149,22 @@ bool constrain(const vector<EQD> &eqds, vector<C> &open_key, vector<C> &fixed_ke
 
 #ifdef CHECK
                 wcout<<"Bound open key "<<t.offset<<" to value "<<new_value<<endl;
-#endif     
+#endif
                 //Resolve new constraints from this criteria
-                if(!constrain(eqds, open_key, fixed_key, t, keylen))
-                    return false;
+				observations[t.offset]++;
+                int cs = constrain(eqds, open_key, fixed_key, t, keylen, observations);
+                if(cs<0) return -1; else coupling = std::max(coupling, cs)+1;
                 break;
             }
         }
     }
-    return true;
+    return coupling;
 }
 
-bool slv(const vector<EQD> &eqds, vector<C> &open_key, vector<C> &fixed_key, int keylen){
+bool slv(const vector<EQD> &eqds, vector<C> &open_key, vector<C> &fixed_key, int keylen, map<int,int> &observations){
 
     int independents = 0;
     while(open_key.size()){
-        independents++;
 
         //Get the first unconstrained character
         C c = open_key.back();
@@ -167,11 +173,13 @@ bool slv(const vector<EQD> &eqds, vector<C> &open_key, vector<C> &fixed_key, int
         wcout<<"Added "<<c.offset<<", "<<c.value<<" as unbounded constraint"<<endl;
 #endif
         //Constrain it to any value
-        c.value = 0;
+        c.value = 1;
         fixed_key.push_back(c);
 
         //Resolve the constraint graph
-        if(!constrain(eqds, open_key, fixed_key, c, keylen)){
+		//
+		int coupling = constrain(eqds, open_key, fixed_key, c, keylen, observations);
+        if(coupling < 0){
 #ifdef CHECK
             wcout<<"Resolution failed"<<endl;
 #endif
@@ -181,8 +189,15 @@ bool slv(const vector<EQD> &eqds, vector<C> &open_key, vector<C> &fixed_key, int
             wcout<<"Constraint "<<c.offset<<", "<<c.value<<" was resolved."<<endl;
 #endif
         }
+
+		if(coupling == 0){
+			fixed_key.back().value = -1;
+		} else if(coupling > 0) {
+
+        	independents++;
+		}
+		
     }
-    wcout<<"Resolution found with "<<independents<<" independent variables"<<endl;
 #ifdef CHECK
     for(auto c : fixed_key){
         wcout<<c.offset<<": "<<c.value<<" \t";
@@ -243,19 +258,22 @@ int main(int argc, char **argv) {
         }
 
     }
-    wstring falphabet = L"adeghijklmnoprstuvyäö,. ";
+    wstring falphabet = L"abcdefghijklmnopqrstuvwxyzåäö";
 
-    for(int k=84;k > 2;--k){ 
+    for(int k=83;k > 82;--k){ 
         mv = k;
-        for(int i=1;i < 139; ++i){
+		int i=137;
+        {
             vector<C> open_key;
             vector<C> fixed_key;
+			map<int,int> obs;
             for(int j=0;j < i;++j) open_key.emplace_back(j, 0);
-            if(!slv(constraints, open_key, fixed_key, i)){
+            if(!slv(constraints, open_key, fixed_key, i, obs)){
                 continue;
             }
-            wcout<<"mv="<<mv<<endl;;
-            wcout<<"kl="<<i<<endl;
+            /*wcout<<"mv="<<mv;
+            wcout<<" \tkl="<<i;*/
+			wcout<<" \tR="<<R;
 
             vector<int> data;
             data.resize(i, 0);
@@ -266,14 +284,26 @@ int main(int argc, char **argv) {
             }
 
 
+
             for(int ofs=0;ofs < 1;++ofs){
                 map<int, int> hist;
                 getdigits();
                 wcout<<"repeating key:"<<endl;
-                for(int c = 0; c < 137;++c){
-                    wcout<<(wchar_t)alphabetize(((data[c%i]+ofs)%modval()),falphabet);
-                }
-                wcout<<endl;
+				for(int c=0; c < 137;++c){
+					if(obs[c]<10)
+						wcout<<(obs[c]);
+					else
+						wcout<<'+';
+				}
+				wcout<<endl;
+				for(int c = 0; c < 137;++c){
+					if(data[c%i] >= 0)
+						wcout<<(wchar_t)(32 + data[c%i]);
+						//wcout<<(wchar_t)alphabetize(((data[c%i]+ofs)%modval()),falphabet);
+					else 
+						wcout<<" ";
+				}
+				wcout<<endl;
 
                 wcout<<"decoded outputs:"<<endl;
                 int ccc = 0;
@@ -281,9 +311,13 @@ int main(int argc, char **argv) {
                     int p=0;
 
                     for(auto c : e){
-                        int d = alphabetize(decrypt(c, data[p%i]+ofs, p)%modval(), falphabet);
-                        wcout<<(wchar_t)d;
-                        hist[d]++;
+                        //int d = alphabetize(decrypt(c, data[p%i]+ofs, p)%modval(), falphabet);
+						int d = 32 + decrypt(c, data[p%i]+ofs, p);
+						if(data[p%i] >= 0){
+                        	wcout<<(wchar_t)d;
+                        	hist[d]++;
+						}else
+							wcout<<" ";
                         ++p;
                     }
                     wcout<<endl;
@@ -291,7 +325,7 @@ int main(int argc, char **argv) {
                 }
                 float avg = 0;
                 float var = 0;
-                for(auto e : hist){
+                /*for(auto e : hist){
                     wcout<<(wchar_t)e.first<<": "<<e.second<<" ";
                     for(int i=0;i < e.second;++i) wcout<<"#";
                     wcout<<endl;
@@ -301,9 +335,8 @@ int main(int argc, char **argv) {
                 for(auto e : hist){
                     var += (e.second-avg)*(e.second-avg)/(modval()-1);
                 }
-                wcout<<"var: "<<var<<"; avg: "<<avg<<endl;
+                wcout<<"var: "<<var<<"; avg: "<<avg<<endl;*/
             }
-            exit(0);
         }
     }
 }
